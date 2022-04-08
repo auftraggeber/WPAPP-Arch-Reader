@@ -1,6 +1,6 @@
 const { app, BrowserWindow, dialog } = require('electron')
 const AdmZip = require('adm-zip')
-const { get } = require('http')
+const fs = require('fs')
 
 const createWindow = () => {
     const win = new BrowserWindow({
@@ -8,13 +8,19 @@ const createWindow = () => {
       height: 600
     })
   
-    win.loadFile('index.html')
+    openFileDialog(win)
+   // win.loadFile('index.html')
 
-    let file = dialog.showOpenDialog(
+}
+
+const openFileDialog = (win) => {
+    clearWorkspace()
+
+    dialog.showOpenDialog(
         { 
         filters: [
             {name: "Wochenplan Archiv", extensions:["wparch"]},
-            { name: 'Alle Dateien', extensions: ['*'] }
+            {name: 'Alle Dateien', extensions: ['*']}
         ],
         properties: ['openFile'] 
         }
@@ -31,7 +37,7 @@ const createWindow = () => {
 
             win.webContents.addListener('will-navigate', (event, toUrl) => {
                 event.preventDefault();
-                console.log(toUrl);
+                //alert("ALPHA-Nachricht: Navigation gestoppt: Es ist keine Navigation durch das Archiv möglich.")
             })
 
             win.webContents.addListener('new-window', (event) => {
@@ -44,6 +50,14 @@ const createWindow = () => {
 app.whenReady().then(() => {
     createWindow()
 })
+
+const clearWorkspace = () => {
+    let path = getWorkSpacePath();
+
+    if (fs.existsSync(path)) {
+        fs.rmSync(path, {recursive: true})
+    }
+}
 
 const getWorkSpacePath = () => {
     return app.getPath("userData") + "/workspace";
