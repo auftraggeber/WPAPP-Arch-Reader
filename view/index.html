@@ -4,26 +4,34 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-    </head>
-    <body>
+        <title>Wochenplan Leser</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
         <script>
 
             const { ipcRenderer } = require('electron');
-            
+
             function openFileDialog() {
                 ipcRenderer.send("open-file-dialog", {});
             }
 
         </script>
-        <div class="welcome">
+    </head>
+    <body>
+        <div class="section">
             <h1>
-                Willkommen
+                Datei auswählen
             </h1>
-            <strong>
-                Dieses Programm ermöglicht das einlesen alter Sicherungsdateien des Wochenplans.
-            </strong>
+            <small class="information">
+                Mit Hilfe dieses Programms können Sie<br/> die Sicherungsdateien aus dem Wochenplan einlesen.<br/>
+                Laden Sie sich dafür die Sicherungsdatei aus dem Wochenplan auf der Stammdatenseite herunter und wählen Sie diese hier aus.
+            </small>
             <button id="open-file-dialog-trigger" onclick="openFileDialog();">Datei öffnen</button>
+        </div>
+        <div class="footer">
+            Dieses Programm wurde mit Hilfe von Electron und AdmZip entworfen.<p/>
+            Copyright (c) Electron contributors<br/>
+            Copyright (c) 2013-2020 GitHub Inc.<br/>
+            Copyright (c) 2012 Another-D-Mention Software and other contributors
         </div>
     </body>
 </html>

@@ -4,8 +4,10 @@ const fs = require('fs')
 
 const createWindow = () => {
     const win = new BrowserWindow({
-      width: 1200,
-      height: 600,
+      width: 400,
+      height: 330,
+      resizable: false,
+      maximizable: false,
       webPreferences: {
         nodeIntegration: true,
         contextIsolation: false
@@ -40,6 +42,9 @@ const openFileDialog = (win) => {
 
             zip.extractAllTo(getWorkSpacePath());
 
+            win.resizable = true;
+            win.maximizable = true;
+            win.setSize(1200, 700);
             win.loadFile(getWorkSpacePath() + "/WPAPP-PLAN-SAVE/plan.html")
 
             win.webContents.addListener('will-navigate', (event, toUrl) => {
