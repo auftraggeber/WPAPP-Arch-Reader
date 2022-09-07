@@ -37,6 +37,9 @@ const openFileDialog = (win) => {
     .then((resp) => {
         if (!resp.canceled) {
             console.log(resp.filePaths[0]);
+            if (!fs.existsSync(getWorkSpacePath())) {
+                fs.mkdirSync(getWorkSpacePath(), { recursive: true });
+            }
 
             let zip = AdmZip(resp.filePaths[0]);
 
