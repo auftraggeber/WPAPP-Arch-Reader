@@ -28,7 +28,7 @@ const openFileDialog = (win) => {
     dialog.showOpenDialog(
         { 
         filters: [
-            {name: "Wochenplan Archiv", extensions:["wparch"]},
+            {name: "Wochenplan Archiv", extensions:["zip"]},
             {name: 'Alle Dateien', extensions: ['*']}
         ],
         properties: ['openFile'] 
