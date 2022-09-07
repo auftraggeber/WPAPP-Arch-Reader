@@ -1,15 +1,22 @@
-const { app, BrowserWindow, dialog } = require('electron')
+const { app, BrowserWindow, dialog, ipcMain } = require('electron')
 const AdmZip = require('adm-zip')
 const fs = require('fs')
 
 const createWindow = () => {
     const win = new BrowserWindow({
       width: 1200,
-      height: 600
+      height: 600,
+      webPreferences: {
+        nodeIntegration: true,
+        contextIsolation: false
+      }
     })
   
-    openFileDialog(win)
-   // win.loadFile('index.html')
+    ipcMain.on("open-file-dialog", (event, arg) => {
+        openFileDialog(win);
+    });
+
+    win.loadFile('view/index.html')
 
 }
 
@@ -37,7 +44,6 @@ const openFileDialog = (win) => {
 
             win.webContents.addListener('will-navigate', (event, toUrl) => {
                 event.preventDefault();
-                //alert("ALPHA-Nachricht: Navigation gestoppt: Es ist keine Navigation durch das Archiv möglich.")
             })
 
             win.webContents.addListener('new-window', (event) => {

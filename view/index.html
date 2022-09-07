@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+
+            const { ipcRenderer } = require('electron');
+            
+            function openFileDialog() {
+                ipcRenderer.send("open-file-dialog", {});
+            }
+
+        </script>
+        <div class="welcome">
+            <h1>
+                Willkommen
+            </h1>
+            <strong>
+                Dieses Programm ermöglicht das einlesen alter Sicherungsdateien des Wochenplans.
+            </strong>
+            <button id="open-file-dialog-trigger" onclick="openFileDialog();">Datei öffnen</button>
+        </div>
+    </body>
+</html>
