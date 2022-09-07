@@ -1,10 +1,14 @@
 {
   "name": "wpapp-arch-reader",
   "version": "1.0.0",
-  "description": "A reader for wparch files.",
+  "description": "Eine Anwendung, die alte Wochenplan-Dateien einliest.",
+  "productName": "Wochenplan-Leser",
   "main": "index.js",
   "scripts": {
-    "test": "electron ."
+    "test": "electron .",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
+    "package-win": "electron-packager . Wochenplan-Leser --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Wochenplan-Leser\"",
+    "package-linux": "electron-packager . Wochenplan-Leser --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/1024x1024.png --prune=true --out=release-builds"
   },
   "author": "Jonas Langner",
   "license": "ISC",
